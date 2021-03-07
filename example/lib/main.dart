@@ -11,7 +11,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _advertisingId = '';
-  bool _isLimitAdTrackingEnabled;
+  bool _isLimitAdTrackingEnabled = false;
 
   @override
   initState() {
@@ -22,10 +22,10 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   initPlatformState() async {
     String advertisingId;
-    bool isLimitAdTrackingEnabled;
+    var isLimitAdTrackingEnabled = false;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      advertisingId = await AdvertisingId.id(true);
+      advertisingId = await AdvertisingId.id(true) ?? "";
     } on PlatformException {
       advertisingId = 'Failed to get platform version.';
     }
